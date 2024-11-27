@@ -52,7 +52,7 @@ public class ModelController {
                 }
             }
 
-            String sqlRequest2 = "INSERT INTO users (id, username, password, name, birthDate) VALUES ('"
+            String sqlRequest2 = "INSERT INTO users (id, username, password, name, birthdate) VALUES ('"
                     + id + "','"
                     + username + "','"
                     + password + "','"
@@ -111,7 +111,7 @@ public class ModelController {
         }
         try {
             Statement statement = connection.createStatement();
-            String sqlRequest = "UPDATE users SET birthDate='"
+            String sqlRequest = "UPDATE users SET birthdate='"
                     + Date.valueOf(birthDate) + "' WHERE username='"
                     + username + "'";
             statement.executeUpdate(sqlRequest);
@@ -161,7 +161,7 @@ public class ModelController {
     public List<String> getListUsers() {
         try {
             Statement statement = connection.createStatement();
-            String sqlRequest = "SELECT username, name, birthDate FROM users";
+            String sqlRequest = "SELECT username, name, birthdate FROM users";
             ResultSet result = statement.executeQuery(sqlRequest);
             List<String> answer = new ArrayList<>();
             while (result.next()) {
