@@ -1,5 +1,7 @@
 package app.servlets;
 
+import app.model.ModelController;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +24,16 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req,
                          HttpServletResponse resp)
             throws ServletException, IOException {
-
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        if (ModelController.getInstance().checkUser(username, password)) {
+            req.getSession().setAttribute("loginData", username);
+            req.getSession().setMaxInactiveInterval(-1);
+            req.removeAttribute("loginError");
+            doGet(req, resp);
+        } else {
+            req.setAttribute("loginError", "404");
+            doGet(req, resp);
+        }
     }
 }
