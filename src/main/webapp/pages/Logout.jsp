@@ -8,9 +8,11 @@
         <button onclick="location.href='/MyWebApp/login'">Login</button>
         <button onclick="location.href='/MyWebApp/reg'">Registration</button>
     </header>
-    <div>
-        <h2>Logout page</h2>
-    </div>
-    <button onclick="location.href='/MyWebApp'">Start page</button>
+    <main>
+        <div>
+            <h2>Logout page</h2>
+        </div>
+        <button onclick="location.href='/MyWebApp'">Start page</button>
+    </main>
 </body>
 </html>
