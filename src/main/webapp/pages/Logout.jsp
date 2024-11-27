@@ -1,6 +1,7 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>MyWebApp: Start Page</title>
+    <title>MyWebApp: Logout</title>
 </head>
 <body>
     <header>
@@ -8,8 +9,8 @@
         <button onclick="location.href='/MyWebApp/reg'">Registration</button>
     </header>
     <div>
-        <h2>Start page</h2>
+        <h2>Logout page</h2>
     </div>
-    <button onclick="location.href='/MyWebApp/users'">User List</button>
+    <button onclick="location.href='/MyWebApp'">Start page</button>
 </body>
 </html>
