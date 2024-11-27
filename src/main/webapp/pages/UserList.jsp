@@ -29,7 +29,10 @@
                     out.println("<li>" + user + "</li>");
                 }
                 out.println("</ol>");
+            } else {
+                out.println("<h3>Login for see User List</h3>")
             }
+
         %>
     </main>
 </body>
