@@ -158,7 +158,7 @@ public class ModelController {
         }
     }
 
-    public List<String> getListUsernames() {
+    public List<String> getListUsers() {
         try {
             Statement statement = connection.createStatement();
             String sqlRequest = "SELECT username, name, birthDate FROM users";
