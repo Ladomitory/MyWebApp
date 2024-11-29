@@ -48,6 +48,47 @@ public class ModelController {
             while (result.next()) {
                 int _id = result.getInt("id");
                 if (_id > id) {
+                    id = _id;
+                }
+            }
+            id += 1;
+
+            String sqlRequest2 = "INSERT INTO users (id, username, password, name, birthdate) VALUES ('"
+                    + id + "','"
+                    + username + "','"
+                    + password + "','"
+                    + name + "','"
+                    + Date.valueOf(birthDate) + "')";
+            statement.executeUpdate(sqlRequest2);
+
+            statement.close();
+            return 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int add(String username, String password, String name, Date birthDate) {
+        if (username.length() > 30) {
+            return 101;
+        } if (checkUsername(username)) {
+            return 201;
+        } if (password.length() > 30) {
+            return 102;
+        } if (name.length() > 60) {
+            return 103;
+        } if (birthDate.after(Date.valueOf(LocalDate.now()))) {
+            return 104;
+        }
+        try {
+            Statement statement = connection.createStatement();
+
+            String sqlRequest = "SELECT id FROM users";
+            ResultSet result = statement.executeQuery(sqlRequest);
+            int id = 0;
+            while (result.next()) {
+                int _id = result.getInt("id");
+                if (_id > id) {
                     id = _id + 1;
                 }
             }
@@ -57,8 +98,8 @@ public class ModelController {
                     + username + "','"
                     + password + "','"
                     + name + "','"
-                    + Date.valueOf(birthDate) + "')";
-            statement.executeQuery(sqlRequest2);
+                    + birthDate + "')";
+            statement.executeUpdate(sqlRequest2);
 
             statement.close();
             return 0;
