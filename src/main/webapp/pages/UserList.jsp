@@ -6,6 +6,7 @@
 </head>
 <body>
     <header>
+        <button onclick="location.href='/MyWebApp'">Start page</button>
         <%
             if (request.getSession().getAttribute("loginData") != null) {
                 String loginData = (String) request.getSession().getAttribute("loginData");
@@ -30,7 +31,7 @@
                 }
                 out.println("</ol>");
             } else {
-                out.println("<h3>Login for see User List</h3>")
+                out.println("<h3>Login for see User List</h3>");
             }
 
         %>

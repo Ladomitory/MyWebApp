@@ -5,6 +5,7 @@
   </head>
   <body>
     <header>
+      <button onclick="location.href='/MyWebApp'">Start page</button>
       <%
         if (request.getSession().getAttribute("loginData") != null) {
           String loginData = (String) request.getSession().getAttribute("loginData");
