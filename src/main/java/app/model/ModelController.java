@@ -120,6 +120,7 @@ public class ModelController {
                     + newPassword + "' WHERE username='"
                     + username + "'";
             statement.executeUpdate(sqlRequest);
+            statement.close();
             return 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -138,6 +139,7 @@ public class ModelController {
                     + name + "' WHERE username='"
                     + username + "'";
             statement.executeUpdate(sqlRequest);
+            statement.close();
             return 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -156,6 +158,7 @@ public class ModelController {
                     + Date.valueOf(birthDate) + "' WHERE username='"
                     + username + "'";
             statement.executeUpdate(sqlRequest);
+            statement.close();
             return 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -175,6 +178,7 @@ public class ModelController {
                     return true;
                 }
             }
+            statement.close();
             return false;
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
@@ -193,6 +197,7 @@ public class ModelController {
                     return true;
                 }
             }
+            statement.close();
             return false;
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
@@ -211,9 +216,27 @@ public class ModelController {
                 Date _birthDate = result.getDate("birthDate");
                 answer.add(_username + " - " + _name + " - " + _birthDate.toString());
             }
+            statement.close();
             return answer;
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
+        }
+    }
+
+    public List<String> getUser(String username) {
+        try {
+            Statement statement = connection.createStatement();
+            String sqlReques = "SELECT * FROM users WHERE username='" + username + "'";
+            ResultSet result = statement.executeQuery(sqlReques);
+            List<String> answer = new ArrayList<>();
+            result.next();
+            answer.add(result.getString("username"));
+            answer.add(result.getString("name"));
+            answer.add(result.getDate("birthdate").toString());
+            statement.close();
+            return answer;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

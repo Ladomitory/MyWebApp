@@ -10,7 +10,7 @@
         <%
             if (request.getSession().getAttribute("loginData") != null) {
                 String loginData = (String) request.getSession().getAttribute("loginData");
-                out.println(loginData + "  ");
+                out.println("<a href=\"/MyWebApp/account\">" + loginData + "</a>");
                 out.println("<button onclick=\"location.href='/MyWebApp/logout'\">Logout</button>");
             } else {
                 out.println("<button onclick=\"location.href='/MyWebApp/login'\">Login</button>");

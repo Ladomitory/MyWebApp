@@ -22,12 +22,12 @@
     <servlet-class>app.servlets.RegistrationServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>changing-data</servlet-name>
-    <servlet-class>app.servlets.ChangingDataServlet</servlet-class>
-  </servlet>
-  <servlet>
     <servlet-name>user-list</servlet-name>
     <servlet-class>app.servlets.UserListServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>account</servlet-name>
+    <servlet-class>app.servlets.AccountServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -43,11 +43,11 @@
     <url-pattern>/reg</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>changing-data</servlet-name>
-    <url-pattern>/change</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
     <servlet-name>user-list</servlet-name>
     <url-pattern>/users</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>account</servlet-name>
+    <url-pattern>/account</url-pattern>
   </servlet-mapping>
 </web-app>
