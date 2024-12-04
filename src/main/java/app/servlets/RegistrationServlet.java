@@ -27,10 +27,14 @@ public class RegistrationServlet extends HttpServlet {
                           HttpServletResponse resp)
             throws ServletException, IOException {
         String username = req.getParameter("username");
+
         String password = req.getParameter("password");
+
         String name = req.getParameter("name");
+
         String _birthDate = req.getParameter("birthdate");
         LocalDate birthDate = LocalDate.parse(_birthDate);
+
         int errorCode = ModelController.getInstance().add(username, password, name, birthDate);
         req.setAttribute("regError", String.valueOf(errorCode));
         if (errorCode == 0) {
