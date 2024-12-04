@@ -21,31 +21,35 @@
             <h2>Registration page</h2>
         </div>
         <div>
-            <form method="post">
-                <h3>Registration form</h3>
-                <label>
-                    Username: <input type="text" name="username" required/>
-                </label>
-                <br/>
-                <label>
-                    Name: <input type="text" name="name" required/>
-                </label>
-                <br/>
-                <label>
-                    BirthDate: <input type="date" name="birthDate" required/>
-                </label>
-                <br/>
-                <label>
-                    Password: <input type="password" name="password" required/>
-                </label>
-                <br/>
-                <button type="submit">Submit</button>
-            </form>
+            <%
+                if (request.getAttribute("regData") == null) {
+                    out.println("<form method=\"post\">\n" +
+                            " <h3>Registration form</h3>\n" +
+                            " <label>\n" +
+                            "  Username: <input type=\"text\" name=\"username\" required/>\n" +
+                            " </label>\n" +
+                            " <br/>\n" +
+                            " <label>\n" +
+                            "  Name: <input type=\"text\" name=\"name\" required/>\n" +
+                            " </label>\n" +
+                            " <br/>\n" +
+                            " <label>\n" +
+                            "  BirthDate: <input type=\"date\" name=\"birthdate\" required/>\n" +
+                            " </label>\n" +
+                            " <br/>\n" +
+                            " <label>\n" +
+                            "  Password: <input type=\"password\" name=\"password\" required/>\n" +
+                            " </label>\n" +
+                            " <br/>\n" +
+                            " <button type=\"submit\">Submit</button>\n" +
+                            "</form>");
+                }
+            %>
             <%
                 if (request.getAttribute("regError") != null) {
                     String regError = (String) request.getAttribute("regError");
                     if (regError.equals("0")) {
-                        out.println("<h4>Success, go on</h4>");
+                        out.println("<h4>You have successfully registered</h4>");
                     } else if (regError.equals("101")) {
                         out.println("<h4>Username have no more 30 characters</h4>");
                     } else if (regError.equals("102")) {

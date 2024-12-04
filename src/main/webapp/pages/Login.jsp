@@ -21,18 +21,22 @@
         <h2>Login page</h2>
       </div>
       <div>
-        <form method="post">
-          <h3>Login form</h3>
-          <label>
-            Username: <input type="text" name="username"/>
-          </label>
-          <br/>
-          <label>
-            Password: <input type="password" name="password"/>
-          </label>
-          <br/>
-          <button type="submit">Submit</button>
-        </form>
+        <%
+          if (request.getSession().getAttribute("loginData") == null) {
+            out.println("<form method=\"post\">\n" +
+                    " <h3>Login form</h3>\n" +
+                    " <label>\n" +
+                    "  Username: <input type=\"text\" name=\"username\"/>\n" +
+                    " </label>\n" +
+                    " <br/>\n" +
+                    " <label>\n" +
+                    "  Password: <input type=\"password\" name=\"password\"/>\n" +
+                    " </label>\n" +
+                    " <br/>\n" +
+                    " <button type=\"submit\">Submit</button>\n" +
+                    "</form>");
+        }
+        %>
         <%
           if (request.getAttribute("loginError") != null) {
             String error = (String) request.getAttribute("loginError");

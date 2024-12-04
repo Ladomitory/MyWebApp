@@ -30,9 +30,12 @@ public class RegistrationServlet extends HttpServlet {
         String password = req.getParameter("password");
         String name = req.getParameter("name");
         String _birthDate = req.getParameter("birthdate");
-        LocalDate birthDate = LocalDate.parse("2000-01-01");
+        LocalDate birthDate = LocalDate.parse(_birthDate);
         int errorCode = ModelController.getInstance().add(username, password, name, birthDate);
         req.setAttribute("regError", String.valueOf(errorCode));
+        if (errorCode == 0) {
+            req.setAttribute("regData", "0");
+        }
         doGet(req, resp);
     }
 }
