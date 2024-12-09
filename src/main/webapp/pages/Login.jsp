@@ -9,6 +9,7 @@
         <%
         if (request.getSession().getAttribute("loginData") != null) {
           String loginData = (String) request.getSession().getAttribute("loginData");
+          out.println("<button onclick=\"location.href='/MyWebApp/users'\">User List</button>");
           out.println("<a href=\"/MyWebApp/account\">" + loginData + "</a>");
           out.println("<button onclick=\"location.href='/MyWebApp/logout'\">Logout</button>");
         } else {
@@ -48,13 +49,13 @@
           }
         %>
       </div>
-      <div>
-        <%
-          if (request.getSession().getAttribute("loginData") != null) {
-            out.println("<button onclick=\"location.href='/MyWebApp/users'\">User List</button>");
-          }
-        %>
-      </div>
+<%--      <div>--%>
+<%--        <%--%>
+<%--          if (request.getSession().getAttribute("loginData") != null) {--%>
+<%--            out.println("<button onclick=\"location.href='/MyWebApp/users'\">User List</button>");--%>
+<%--          }--%>
+<%--        %>--%>
+<%--     </div>--%>
     </main>
   </body>
 </html>
