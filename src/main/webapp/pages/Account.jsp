@@ -28,6 +28,7 @@
       String loginData = (String) request.getSession().getAttribute("loginData");
       out.println(loginData);
       out.println("<button onclick=\"location.href='/MyWebApp/logout'\">Logout</button>");
+      out.println("<button onclick=\"location.href='/MyWebApp/changing'\">Changing account data</button>");
     } else {
       out.println("<button onclick=\"location.href='/MyWebApp/login'\">Login</button>");
       out.println("<button onclick=\"location.href='/MyWebApp/reg'\">Registration</button>");
