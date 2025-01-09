@@ -40,10 +40,10 @@ public class ModelController {
             return 104;
         }
         try {
-            Statement statement = connection.createStatement();
+            Statement selectStatement = connection.createStatement();
 
             String sqlRequest = "SELECT id FROM users";
-            ResultSet result = statement.executeQuery(sqlRequest);
+            ResultSet result = selectStatement.executeQuery(sqlRequest);
             int id = 0;
             while (result.next()) {
                 int _id = result.getInt("id");
@@ -53,55 +53,35 @@ public class ModelController {
             }
             id += 1;
 
-            String sqlRequest2 = "INSERT INTO users (id, username, password, name, birthdate) VALUES ('"
-                    + id + "','"
-                    + username + "','"
-                    + password + "','"
-                    + name + "','"
-                    + Date.valueOf(birthDate) + "')";
-            statement.executeUpdate(sqlRequest2);
+            PreparedStatement insertStatement = connection.prepareStatement(
+                    """
+                            INSERT INTO users
+                            (
+                                id,
+                                username,
+                                password,
+                                name,
+                                birthdate
+                            )
+                            VALUES (?, ?, ?, ?, ?)
+                            """
+            );
+            insertStatement.setInt(1, id);
+            insertStatement.setString(2, username);
+            insertStatement.setString(3, password);
+            insertStatement.setString(4, name);
+            insertStatement.setDate(5, Date.valueOf(birthDate));
+            insertStatement.executeUpdate();
 
-            statement.close();
-            return 0;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//            String sqlRequest2 = "INSERT INTO users (id, username, password, name, birthdate) VALUES ('"
+//                    + id + "','"
+//                    + username + "','"
+//                    + password + "','"
+//                    + name + "','"
+//                    + Date.valueOf(birthDate) + "')";
+//            selectStatement.executeUpdate(sqlRequest2);
 
-    public int add(String username, String password, String name, Date birthDate) {
-        if (username.length() > 30) {
-            return 101;
-        } if (checkUsername(username)) {
-            return 201;
-        } if (password.length() > 30) {
-            return 102;
-        } if (name.length() > 60) {
-            return 103;
-        } if (birthDate.after(Date.valueOf(LocalDate.now()))) {
-            return 104;
-        }
-        try {
-            Statement statement = connection.createStatement();
-
-            String sqlRequest = "SELECT id FROM users";
-            ResultSet result = statement.executeQuery(sqlRequest);
-            int id = 0;
-            while (result.next()) {
-                int _id = result.getInt("id");
-                if (_id > id) {
-                    id = _id + 1;
-                }
-            }
-
-            String sqlRequest2 = "INSERT INTO users (id, username, password, name, birthdate) VALUES ('"
-                    + id + "','"
-                    + username + "','"
-                    + password + "','"
-                    + name + "','"
-                    + birthDate + "')";
-            statement.executeUpdate(sqlRequest2);
-
-            statement.close();
+            selectStatement.close();
             return 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
