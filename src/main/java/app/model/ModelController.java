@@ -95,12 +95,22 @@ public class ModelController {
             return 103;
         }
         try {
-            Statement statement = connection.createStatement();
-            String sqlRequest = "UPDATE users SET password='"
-                    + newPassword + "' WHERE username='"
-                    + username + "'";
-            statement.executeUpdate(sqlRequest);
-            statement.close();
+            PreparedStatement updateStatement = connection.prepareStatement(
+                    """
+                            UPDATE users 
+                            SET password = ? 
+                            WHERE username = ?
+                            """
+            );
+            updateStatement.setString(1, newPassword);
+            updateStatement.setString(2, username);
+            updateStatement.executeUpdate();
+//            Statement statement = connection.createStatement();
+//            String sqlRequest = "UPDATE users SET password='"
+//                    + newPassword + "' WHERE username='"
+//                    + username + "'";
+//            statement.executeUpdate(sqlRequest);
+//            statement.close();
             return 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -114,12 +124,22 @@ public class ModelController {
             return 103;
         }
         try {
-            Statement statement = connection.createStatement();
-            String sqlRequest = "UPDATE users SET name='"
-                    + name + "' WHERE username='"
-                    + username + "'";
-            statement.executeUpdate(sqlRequest);
-            statement.close();
+            PreparedStatement updateStatement = connection.prepareStatement(
+                    """
+                            UPDATE users
+                            SET name = ?
+                            WHERE username = ?
+                            """
+            );
+            updateStatement.setString(1, name);
+            updateStatement.setString(2, username);
+            updateStatement.executeUpdate();
+//            Statement statement = connection.createStatement();
+//            String sqlRequest = "UPDATE users SET name='"
+//                    + name + "' WHERE username='"
+//                    + username + "'";
+//            statement.executeUpdate(sqlRequest);
+//            statement.close();
             return 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -133,12 +153,22 @@ public class ModelController {
             return 103;
         }
         try {
-            Statement statement = connection.createStatement();
-            String sqlRequest = "UPDATE users SET birthdate='"
-                    + Date.valueOf(birthDate) + "' WHERE username='"
-                    + username + "'";
-            statement.executeUpdate(sqlRequest);
-            statement.close();
+            PreparedStatement updateStatement = connection.prepareStatement(
+                    """
+                            UPDATE users
+                            SET birthdate = ?
+                            WHERE username = ?
+                            """
+            );
+            updateStatement.setDate(1, Date.valueOf(birthDate));
+            updateStatement.setString(2, username);
+            updateStatement.executeUpdate();
+//            Statement statement = connection.createStatement();
+//            String sqlRequest = "UPDATE users SET birthdate='"
+//                    + Date.valueOf(birthDate) + "' WHERE username='"
+//                    + username + "'";
+//            statement.executeUpdate(sqlRequest);
+//            statement.close();
             return 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
