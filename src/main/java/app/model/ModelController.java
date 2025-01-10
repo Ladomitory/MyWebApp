@@ -40,10 +40,11 @@ public class ModelController {
             return 104;
         }
         try {
-            Statement selectStatement = connection.createStatement();
-
-            String sqlRequest = "SELECT id FROM users";
-            ResultSet result = selectStatement.executeQuery(sqlRequest);
+            PreparedStatement selectStatement = connection.prepareStatement("SELECT id FROM users");
+            ResultSet result = selectStatement.getResultSet();
+//            Statement selectStatement = connection.createStatement();
+//            String sqlRequest = "SELECT id FROM users";
+//            ResultSet result = selectStatement.executeQuery(sqlRequest);
             int id = 0;
             while (result.next()) {
                 int _id = result.getInt("id");
@@ -177,9 +178,11 @@ public class ModelController {
 
     public boolean checkUser(String username, String password) {
         try {
-            Statement statement = connection.createStatement();
-            String sqlRequest = "SELECT username, password FROM users";
-            ResultSet result = statement.executeQuery(sqlRequest);
+            PreparedStatement selectStatement = connection.prepareStatement("SELECT username, password FROM users");
+            ResultSet result = selectStatement.getResultSet();
+//            Statement statement = connection.createStatement();
+//            String sqlRequest = "SELECT username, password FROM users";
+//            ResultSet result = statement.executeQuery(sqlRequest);
             while (result.next()) {
                 String _username = result.getString("Username");
                 String _password = result.getString("Password");
@@ -188,7 +191,7 @@ public class ModelController {
                     return true;
                 }
             }
-            statement.close();
+//            statement.close();
             return false;
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
@@ -197,9 +200,11 @@ public class ModelController {
 
     public boolean checkUsername(String username) {
         try {
-            Statement statement = connection.createStatement();
-            String sqlRequest = "SELECT username FROM users";
-            ResultSet result = statement.executeQuery(sqlRequest);
+            PreparedStatement selectStatement = connection.prepareStatement("SELECT username FROM users");
+            ResultSet result = selectStatement.getResultSet();
+//            Statement statement = connection.createStatement();
+//            String sqlRequest = "SELECT username FROM users";
+//            ResultSet result = statement.executeQuery(sqlRequest);
             while (result.next()) {
                 String _username = result.getString("Username");
 
@@ -207,7 +212,7 @@ public class ModelController {
                     return true;
                 }
             }
-            statement.close();
+//            statement.close();
             return false;
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
@@ -216,9 +221,11 @@ public class ModelController {
 
     public List<String> getListUsers() {
         try {
-            Statement statement = connection.createStatement();
-            String sqlRequest = "SELECT username, name, birthdate FROM users";
-            ResultSet result = statement.executeQuery(sqlRequest);
+            PreparedStatement selectStatement = connection.prepareStatement("SELECT username, name, birthdate FROM users");
+            ResultSet result = selectStatement.getResultSet();
+//            Statement statement = connection.createStatement();
+//            String sqlRequest = "SELECT username, name, birthdate FROM users";
+//            ResultSet result = statement.executeQuery(sqlRequest);
             List<String> answer = new ArrayList<>();
             while (result.next()) {
                 String _username = result.getString("username");
@@ -226,7 +233,7 @@ public class ModelController {
                 Date _birthDate = result.getDate("birthDate");
                 answer.add(_username + " - " + _name + " - " + _birthDate.toString());
             }
-            statement.close();
+//            statement.close();
             return answer;
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
@@ -235,15 +242,18 @@ public class ModelController {
 
     public List<String> getUser(String username) {
         try {
-            Statement statement = connection.createStatement();
-            String sqlReques = "SELECT * FROM users WHERE username='" + username + "'";
-            ResultSet result = statement.executeQuery(sqlReques);
+            PreparedStatement selectStatment = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
+            selectStatment.setString(1, username);
+            ResultSet result = selectStatment.getResultSet();
+//            Statement statement = connection.createStatement();
+//            String sqlReques = "SELECT * FROM users WHERE username='" + username + "'";
+//            ResultSet result = statement.executeQuery(sqlReques);
             List<String> answer = new ArrayList<>();
             result.next();
             answer.add(result.getString("username"));
             answer.add(result.getString("name"));
             answer.add(result.getDate("birthdate").toString());
-            statement.close();
+//            statement.close();
             return answer;
         } catch (SQLException e) {
             throw new RuntimeException(e);
